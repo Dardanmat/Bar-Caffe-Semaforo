@@ -1,9 +1,35 @@
 package tpsit.ordinazionicaffe;
-import java.util.concurrent.Semaphore;
 
+//thread consumatore
+public class Cameriere extends Thread{
 
-public class Cameriere {
+    protected static int ordinazioniTot = 0;
     
-    protected static int ordinazioni = 0; //ordinazioni del cameriere
-    protected static Semaphore semaforoCameriere = new Semaphore(1);
+    private static int numClienti = 0;
+    
+    public Cameriere(String name, int numClienti) {
+        super(name);
+        this.numClienti = numClienti;
+    }
+
+    @Override
+    public void run() {
+        while (numClienti > 0) {            
+            try{
+                System.out.println("Cameriere aspetta l'ordinazione");
+
+                Tavolo.semPieno.acquire();
+
+                int ord = Tavolo.prelevaOrdinazioni();
+                ordinazioniTot += ord;
+                System.out.println("Cameriere ha preso " + ord + " ordinazioni");
+                System.out.println("Cameriere ha " + ordinazioniTot + " ordinazioni totali");
+
+                Tavolo.semVuoto.release();
+            
+            }catch(InterruptedException e){}
+            numClienti--;
+        }
+    }
+    
 }

@@ -18,6 +18,10 @@ public class Main {
         listaClienti.add(new Cliente("Mohammed"));
         listaClienti.add(new Cliente("Giuseppe"));
         
+        Cameriere cameriere = new Cameriere("Grullo", listaClienti.size());
+        
+        cameriere.start();
+        
         for (Cliente c : listaClienti) {
             c.start();
         }
@@ -26,10 +30,11 @@ public class Main {
             for (Cliente c : listaClienti) {
                 c.join();
             }
+            cameriere.join();
         }catch(InterruptedException e){}
         
         System.out.println("\nChiusura del Bar Caffè");
-        System.out.println("Totali incassi della giornata: " + Cameriere.ordinazioni + "€");
+        System.out.println("Totali incassi della giornata: " + Cameriere.ordinazioniTot + "€");
         
     }
 }
