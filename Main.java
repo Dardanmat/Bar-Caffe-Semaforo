@@ -15,10 +15,10 @@ public class Main {
         listaClienti.add(new Cliente("Alessio"));
         listaClienti.add(new Cliente("Lorenzo"));
         listaClienti.add(new Cliente("Leonardo"));
-        listaClienti.add(new Cliente("Mohammed"));
+        listaClienti.add(new Cliente("Bernardo"));
         listaClienti.add(new Cliente("Giuseppe"));
         
-        Cameriere cameriere = new Cameriere("Grullo", listaClienti.size());
+        Cameriere cameriere = new Cameriere("Samuele", listaClienti.size());
         
         cameriere.start();
         
